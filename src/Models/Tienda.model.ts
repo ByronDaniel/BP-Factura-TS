@@ -5,13 +5,9 @@ export class Tienda {
     constructor() {
       this.ProductosDisponibles = [];
     }
-  
-    consultarProductosDisponibles() : IProductosDisponibles[]{
-      return this.ProductosDisponibles;
-    }
     
     //metodo para agregar productos a la tienda
-    agregarProductoDisponible(nombreProducto: string, precio: number) {
+    agregarProductoDisponible(nombreProducto: string, precio: number) : string | undefined{
       let nuevoProducto: IProductosDisponibles = {
         cod: randomNumber(),
         nombreProducto,
@@ -20,11 +16,12 @@ export class Tienda {
       let existeProducto: IProductosDisponibles = this.obtenerInfoProducto(nombreProducto);
       if (existeProducto.cod == "") {
         this.ProductosDisponibles.push(nuevoProducto);
+        return "Producto agregado a la Tienda";
       }
     }
   
     //metodo para obtener informacion de un producto, codigo y precio
-    protected obtenerInfoProducto(nombreProducto: string): any {
+    obtenerInfoProducto(nombreProducto: string): IProductosDisponibles {
       let productoInformacion: IProductosDisponibles = {
         nombreProducto: "",
         cod: "",
