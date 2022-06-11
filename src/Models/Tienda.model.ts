@@ -8,31 +8,26 @@ export class Tienda {
     
     //metodo para agregar productos a la tienda
     agregarProductoDisponible(nombreProducto: string, precio: number) : string | undefined{
-      let nuevoProducto: IProductosDisponibles = {
-        cod: randomNumber(),
-        nombreProducto,
-        precio,
-      };
-      let existeProducto: IProductosDisponibles = this.obtenerInfoProducto(nombreProducto);
-      if (existeProducto.cod == "") {
-        this.ProductosDisponibles.push(nuevoProducto);
+      if (this.obtenerInfoProducto(nombreProducto) != undefined) {
+        this.ProductosDisponibles.push({
+          cod: randomNumber(),
+          nombreProducto,
+          precio,
+        });
         return "Producto agregado a la Tienda";
       }
     }
   
     //metodo para obtener informacion de un producto, codigo y precio
     obtenerInfoProducto(nombreProducto: string): IProductosDisponibles {
-      let productoInformacion: IProductosDisponibles = {
-        nombreProducto: "",
-        cod: "",
-        precio: 0,
-      };
-      this.ProductosDisponibles.forEach((e) => {
-        if (e.nombreProducto == nombreProducto) {
-          productoInformacion = e;
+      const inforProducto = this.ProductosDisponibles.find(producto => producto.nombreProducto == nombreProducto);
+      if(inforProducto != undefined){
+        return inforProducto;
+      }else{
+        return{
+          nombreProducto:"",
+          precio:0
         }
-      });
-      return productoInformacion;
+      }
     }
 }
-  

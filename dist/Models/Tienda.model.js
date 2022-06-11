@@ -6,34 +6,29 @@ class Tienda {
     constructor() {
         this.ProductosDisponibles = [];
     }
-    consultarProductosDisponibles() {
-        return this.ProductosDisponibles;
-    }
     //metodo para agregar productos a la tienda
     agregarProductoDisponible(nombreProducto, precio) {
-        let nuevoProducto = {
-            cod: (0, randomNumber_1.randomNumber)(),
-            nombreProducto,
-            precio,
-        };
-        let existeProducto = this.obtenerInfoProducto(nombreProducto);
-        if (existeProducto.cod == "") {
-            this.ProductosDisponibles.push(nuevoProducto);
+        if (this.obtenerInfoProducto(nombreProducto) != undefined) {
+            this.ProductosDisponibles.push({
+                cod: (0, randomNumber_1.randomNumber)(),
+                nombreProducto,
+                precio,
+            });
+            return "Producto agregado a la Tienda";
         }
     }
     //metodo para obtener informacion de un producto, codigo y precio
     obtenerInfoProducto(nombreProducto) {
-        let productoInformacion = {
-            nombreProducto: "",
-            cod: "",
-            precio: 0,
-        };
-        this.ProductosDisponibles.forEach((e) => {
-            if (e.nombreProducto == nombreProducto) {
-                productoInformacion = e;
-            }
-        });
-        return productoInformacion;
+        const inforProducto = this.ProductosDisponibles.find(producto => producto.nombreProducto == nombreProducto);
+        if (inforProducto != undefined) {
+            return inforProducto;
+        }
+        else {
+            return {
+                nombreProducto: "",
+                precio: 0
+            };
+        }
     }
 }
 exports.Tienda = Tienda;

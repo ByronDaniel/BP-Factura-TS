@@ -12,6 +12,7 @@ factura.agregarProductoDisponible("Mortadela", 1);
 //Agrego Productos a la Factura
 factura.agregarProducto(2, "Aceite");
 factura.agregarProducto(2, "Aceite");
+factura.agregarProducto(2, "Aceite");
 factura.agregarProducto(3, "Jamon");
 factura.agregarProducto(1, "Leche");
 factura.agregarProducto(5, "Pan");
